@@ -8,7 +8,8 @@ const CompanySchema = mongoose.Schema({
     companyPhone:String,
     companyWebsite:String,
     contactEmail:String,
-    otherContact:String
+    otherContact:String,
+    status:{type:String, default: 'Not reached'}
 
 });
 
