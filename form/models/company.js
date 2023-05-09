@@ -9,7 +9,10 @@ const CompanySchema = mongoose.Schema({
     companyWebsite:String,
     contactEmail:String,
     otherContact:String,
-    status:{type:String, default: 'Not reached'}
+    status:{type:String, default: 'Not reached'},
+    notes:{type:String, default:''},
+    meetingDate:{type:String, default:''},
+    meetingTime:{type:String, default:''}
 
 });
 

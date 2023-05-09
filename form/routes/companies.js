@@ -15,7 +15,10 @@ router.post("/", async (req, res) => {
       companyWebsite: req.body.companyWebsite,
       contactEmail: req.body.contactEmail,
       otherContact: req.body.otherContact,
-      status:'Not reached'
+      status:'Not reached',
+      notes:req.body.notes,
+      meetingDate: req.body.meetingDate,
+      meetingTime:req.body.meetingTime
     });
 
     await newCompany.save();
