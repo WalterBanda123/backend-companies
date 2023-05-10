@@ -15,10 +15,10 @@ router.post("/", async (req, res) => {
       companyWebsite: req.body.companyWebsite,
       contactEmail: req.body.contactEmail,
       otherContact: req.body.otherContact,
-      status:'Not reached',
-      notes:req.body.notes,
+      status: "Not reached",
+      notes: req.body.notes,
       meetingDate: req.body.meetingDate,
-      meetingTime:req.body.meetingTime
+      meetingTime: req.body.meetingTime,
     });
 
     await newCompany.save();
@@ -45,6 +45,21 @@ router.get("/", async (req, res) => {
   } catch (error) {
     res.status(401).json({
       errorMessage: "Failed to fetch the companies",
+      error: error.message,
+    });
+  }
+});
+router.get("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const company = await Company.findById(id);
+    res.status(200).json({
+      message: "Successfully fetched a company",
+      company: company,
+    });
+  } catch (error) {
+    res.status(401).json({
+      errorMessage: "Failed to fetch a company by ID",
       error: error.message,
     });
   }
