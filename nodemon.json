@@ -2,7 +2,8 @@
 
 {
     "env":{
-        "ENV_SECRET_KEY" : "my_secret_key"
+        "ENV_SECRET_KEY" : "my_secret_key",
+        "NGROK_AUTHTOKEN": "2PbUDw4F3OStDq9Rz3lA0i46yRY_7GK94fLy4bnbT8JLH9bTf"
     }
     
 
