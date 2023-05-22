@@ -37,7 +37,9 @@ router.post("/", async (req, res) => {
 
 //----GETTING ALL THE COMPANIES---
 router.get("/", async (req, res) => {
+ 
   try {
+   
     const companies = await Company.find();
     res.status(200).json({
       message: "Successfully fetched all the companies",

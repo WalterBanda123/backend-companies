@@ -16,22 +16,29 @@ app.use(express.json());
 
 mongoose.Promise = global.Promise;
 
-// app.use(cors(corsOptions)); // Use this after the variable declaration
-// app.use(cors());
+app.use(function (req, res, next) {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "http://localhost:4200"
+    // "*"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header("Access-Control-Allow-Credentials", true);
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+    return res.status(200).json({});
+  }
+  next();
+});
 
-const corsOptions = {
-  origin: "*", // Replace with your frontend domain
-  optionsSuccessStatus: 200, // Some legacy browsers (e.g., IE11) choke on 204
-};
-app.options("*", cors(corsOptions));
-app.use(cors(corsOptions));
-
-app.use("/companies", companyRoutes);
 app.use("/users", userRoutes);
+app.use("/companies", companyRoutes);
 
 app.use((req, res) => {
   const error = new Error();
-
   res.status(500).json({
     error: error,
   });
