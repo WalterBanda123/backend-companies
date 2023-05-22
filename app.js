@@ -16,12 +16,6 @@ app.use(express.json());
 
 mongoose.Promise = global.Promise;
 
-// // cors
-// app.use(cors());
-// app.use(cors({
-//     origin: '*'
-// }));
-// app.options('*', cors());
 
 app.use(function (req, res, next) {
   res.header(
