@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const companyRoutes = require("./form/routes/companies");
 const userRoutes = require("./form/routes/users");
+const campaignRoutes = require("./form/routes/campaigns");
 
 mongoose.connect("mongodb://127.0.0.1:27017/SalesDrive");
 
@@ -19,8 +20,8 @@ mongoose.Promise = global.Promise;
 app.use(function (req, res, next) {
   res.header(
     "Access-Control-Allow-Origin",
-    "http://localhost:4200"
-    // "*"
+    // "http://localhost:4200"
+    "*"
   );
   res.header(
     "Access-Control-Allow-Headers",
@@ -36,6 +37,7 @@ app.use(function (req, res, next) {
 
 app.use("/users", userRoutes);
 app.use("/companies", companyRoutes);
+app.use("/campaign", campaignRoutes);
 
 app.use((req, res) => {
   const error = new Error();
