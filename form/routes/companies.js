@@ -19,6 +19,7 @@ router.post("/", async (req, res) => {
       notes: req.body.notes,
       meetingDate: req.body.meetingDate,
       meetingTime: req.body.meetingTime,
+      companySize: req.body.companySize
     });
 
     await newCompany.save();
