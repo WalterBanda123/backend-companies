@@ -12,7 +12,8 @@ const CompanySchema = mongoose.Schema({
     status:{type:String, default: 'Not reached'},
     notes:{type:String, default:''},
     meetingDate:{type:String, default:''},
-    meetingTime:{type:String, default:''}
+    meetingTime:{type:String, default:''},
+    companySize:{type:String, default:''}
 
 });
 
