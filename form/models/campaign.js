@@ -43,7 +43,4 @@ const CampaignSchema = mongoose.Schema({
   notes: { type: String, default: "" },
 });
 
-
-
-
 module.exports = mongoose.model("Campaign", CampaignSchema);
