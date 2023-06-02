@@ -5,12 +5,25 @@ const CampaignSchema = mongoose.Schema({
   campaign_name: { type: String, default: "" },
   product: {
     type: String,
-    enum: ["lite", "standard", "ios", "android", ""],
+    enum: [
+      "Lite",
+      "Standard",
+      "IOS",
+      "Android",
+      "All",
+      "Web(Lite & Standard)",
+      "Mobile",
+      "All",
+      "",
+    ],
     default: "",
   },
 
   cost: { type: Number, default: 0 },
-  duration: { type: Date, default: new Date() },
+  duration: {
+    startDate: { type: Date, default: "" },
+    endDate: { type: Date, default: "" },
+  },
   awareness: {
     impressions: { type: Number, default: 0 },
     reach: { type: Number, default: 0 },
@@ -34,8 +47,8 @@ const CampaignSchema = mongoose.Schema({
     add_credit_card: { type: Number, default: 0 },
     paid_pilot: { type: Number, default: 0 },
     total_credits_purchased: { type: Number, default: 0 },
-    cash_purchase: { type: Number, default: 0 },
-    visa_purchase: { type: Number, default: 0 },
+    // cash_purchase: { type: Number, default: 0 },
+    // visa_purchase: { type: Number, default: 0 },
     cash_purchase_amount: { type: Number, default: 0 },
     visa_purchase_amount: { type: Number, default: 0 },
   },

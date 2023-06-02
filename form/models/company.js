@@ -20,7 +20,7 @@ const CompanySchema = mongoose.Schema({
     ],
   },
   notes: { type: String, default: "" },
-  meetingDate: { type: String, default: "" },
+  meetingDate: { type: Date, default: "" },
   meetingTime: { type: String, default: "" },
   companySize: { type: String, default: "" },
 });

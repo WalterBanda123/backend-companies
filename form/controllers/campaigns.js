@@ -1,6 +1,5 @@
 const Campaign = require("../models/campaign");
-const mongoose = require('mongoose');
-
+const mongoose = require("mongoose");
 
 // ---CREATING A  CAMPAIGN ---
 exports.campaigns_create_new = async (req, res) => {
@@ -8,8 +7,13 @@ exports.campaigns_create_new = async (req, res) => {
     const newCampaign = new Campaign({
       _id: new mongoose.Types.ObjectId(),
       campaign_name: req.body.campaign_name || "",
-      product: req.body.pruduct || "",
-      cost: req.body.pruduct || 0,
+      product: req.body.product || "",
+      cost: req.body.cost || 0,
+
+      duration: {
+        startDate: req.body.startDate || "",
+        endDate: req.body.endDate || "",
+      },
       awareness: {
         impressions: req.body.impressions || 0,
         reach: req.body.reach || 0,
@@ -17,10 +21,12 @@ exports.campaigns_create_new = async (req, res) => {
         phone_calls: req.body.phone_calls || 0,
         meetings: req.body.meetings || 0,
       },
+
       interest: {
         demo: req.body.demo || 0,
         signups: req.body.signups || 0,
       },
+
       engagement: {
         media_uploads: req.body.media_uploads || 0,
         stakeholder_buy_in: req.body.stakeholder_buy_in || 0,
@@ -30,8 +36,8 @@ exports.campaigns_create_new = async (req, res) => {
         add_credit_card: req.body.add_credit_card || 0,
         paid_pilot: req.body.paid_pilot || 0,
         total_credits_purchased: req.body.total_credits_purchased || 0,
-        cash_purchase: req.body.cash_purchase || 0,
-        visa_purchase: req.body.visa_purchase || 0,
+        // cash_purchase: req.body.cash_purchase || 0,
+        // visa_purchase: req.body.visa_purchase || 0,
         cash_purchase_amount: req.body.cash_purchase_amount || 0,
         visa_purchase_amount: req.body.visa_purchase_amount || 0,
       },
@@ -68,7 +74,7 @@ exports.compaigns_update_by_id = async (req, res) => {
     );
 
     res.status(200).json({
-      message: "Successfully patched campaign details",
+      message: "Successfully updated campaign details",
       status: updatedCampaign,
     });
   } catch (error) {
