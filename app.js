@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const morgan = require("morgan")
 
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -14,6 +15,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(morgan('combined'))
 
 mongoose.Promise = global.Promise;
 
