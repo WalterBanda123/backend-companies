@@ -47,8 +47,6 @@ const CampaignSchema = mongoose.Schema({
     add_credit_card: { type: Number, default: 0 },
     paid_pilot: { type: Number, default: 0 },
     total_credits_purchased: { type: Number, default: 0 },
-    // cash_purchase: { type: Number, default: 0 },
-    // visa_purchase: { type: Number, default: 0 },
     cash_purchase_amount: { type: Number, default: 0 },
     visa_purchase_amount: { type: Number, default: 0 },
   },

@@ -78,6 +78,7 @@ exports.companies_edit_by_id = async (req, res) => {
   }
 };
 
+
 exports.companies_create_new = async (req, res) => {
   try {
     const newCompany = new Company({
