@@ -1,4 +1,3 @@
-const Company = require("./../models/company");
 const express = require("express");
 const checkAuth = require("./../middleware/middleware");
 const router = express.Router();
