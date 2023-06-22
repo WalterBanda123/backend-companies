@@ -1,12 +1,11 @@
 const Company = require("./../models/company");
-const mongoose =  require('mongoose')
-
+const mongoose = require("mongoose");
 
 //----GETTING ALL THE COMPANIES---
 exports.companies_get_all = async (req, res) => {
   try {
     const companies = await Company.find();
-    res.status(200).json({
+    res.status(201).json({
       message: "Successfully fetched all the companies",
       companies: companies,
     });
@@ -23,7 +22,7 @@ exports.company_update_by_id = async (req, res) => {
   try {
     const id = req.params.id;
     const company = await Company.findById(id);
-    res.status(200).json({
+    res.status(201).json({
       message: "Successfully fetched a company",
       company: company,
     });
@@ -40,7 +39,7 @@ exports.company_delete_by_id = async (req, res) => {
   try {
     const id = req.params.companyId;
     const result = await Company.findByIdAndDelete(id);
-    res.status(200).json({
+    res.status(201).json({
       message: "Successfully deleted a company",
       result: result,
     });
@@ -50,8 +49,7 @@ exports.company_delete_by_id = async (req, res) => {
       error: error.message,
     });
   }
-}
-
+};
 
 //--EDITING COMPANY--
 exports.companies_edit_by_id = async (req, res) => {
@@ -66,7 +64,7 @@ exports.companies_edit_by_id = async (req, res) => {
       { $set: updateOperations }
     );
 
-    res.status(200).json({
+    res.status(201).json({
       message: "Successfully patched company details",
       status: updatedCompany,
     });
@@ -77,7 +75,6 @@ exports.companies_edit_by_id = async (req, res) => {
     });
   }
 };
-
 
 exports.companies_create_new = async (req, res) => {
   try {
@@ -97,7 +94,7 @@ exports.companies_create_new = async (req, res) => {
     });
 
     await newCompany.save();
-    res.status(200).json({
+    res.status(201).json({
       message: "Successfully added a new company",
       companyAdded: newCompany,
     });
@@ -105,6 +102,22 @@ exports.companies_create_new = async (req, res) => {
     res.status(401).json({
       errorMessage: "Failed to create a new company",
       error: error.message,
+    });
+  }
+};
+
+exports.text_search = async (req, res) => {
+  try {
+    const searched = req.body.searched;
+    const companies = await Company.find({ $text: { $search: searched } });
+    res.status(201).json({
+      message: "Successfully searched for companies",
+      companies,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch companies",
+      error,
     });
   }
 };

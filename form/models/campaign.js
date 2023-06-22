@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const CampaignSchema = mongoose.Schema({
+const CampaignSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   campaign_name: { type: String, default: "" },
   product: {
@@ -54,4 +54,5 @@ const CampaignSchema = mongoose.Schema({
   notes: { type: String, default: "" },
 });
 
+CampaignSchema.index({ campaign_name: "text", product: "text" });
 module.exports = mongoose.model("Campaign", CampaignSchema);

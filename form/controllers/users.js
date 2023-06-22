@@ -6,19 +6,20 @@ const jwt = require("jsonwebtoken");
 //-REGISTERING A NEW USER----
 exports.users_signup = async (req, res) => {
   const isUserInExistance = await User.find({ email: req.body.email });
-  if (isUserInExistance >= 1) {
-    res.status(409).json({
+
+  if (isUserInExistance.length >= 1) {
+     res.status(409).json({
       message: `User with this email already exist,  please use another email to sign up`,
     });
   } else {
-    bcrypt.hash(req.body.password, 10, (err, hash) => {
-      if (err) {
-        res.status(404).json({
-          errorMessage: `Auth failed`,
-          error: err,
-        });
-      } else {
-        try {
+    try {
+      bcrypt.hash(req.body.password, 10, (err, hash) => {
+        if (err) {
+         return res.status(404).json({
+            errorMessage: `Auth failed`,
+            error: err,
+          });
+        } else {
           const newUser = new User({
             _id: new mongoose.Types.ObjectId(),
             fullName: req.body.fullName,
@@ -31,20 +32,20 @@ exports.users_signup = async (req, res) => {
             message: "Successfully registered",
             user: newUser,
           });
-        } catch (error) {
-          res.status(500).json({
-            errorMessage: error.message,
-          });
         }
-      }
-    });
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Failed to registered",
+        error,
+      });
+    }
   }
 };
 
 //---LOGGING A USER---
 exports.users_sign_in = async (req, res) => {
   const user = await User.find({ email: req.body.email });
-
   if (user.length < 1) {
     return res.status(401).json({
       error: "Auth failed",
@@ -81,6 +82,10 @@ exports.users_sign_in = async (req, res) => {
   });
 };
 
+exports.user_logout = async (req, res) => {
+  try {
+  } catch (error) {}
+};
 //----GETTING USER BY ID -----
 exports.users_get_by_id = async (req, res) => {
   try {

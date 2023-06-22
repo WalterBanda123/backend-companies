@@ -135,3 +135,19 @@ exports.campaigns_get_by_id = async (req, res) => {
     });
   }
 };
+
+exports.text_search_campaign = async (req, res) => {
+  try {
+    const text = req.body.text;
+    const campaigns = await Campaign.find({ $text: { $search: text } });
+    res.status(201).json({
+      message: "Successfully searched for campaigns",
+      campaigns,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch campaigns",
+      error,
+    });
+  }
+};

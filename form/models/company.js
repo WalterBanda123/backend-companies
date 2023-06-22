@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const CompanySchema = mongoose.Schema({
+const CompanySchema =new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   companyName: { type: String, required: true },
   socialMediaLink: String,
@@ -10,19 +10,25 @@ const CompanySchema = mongoose.Schema({
   otherContact: String,
   status: {
     type: String,
-    default: "Not reached",
-    enum: [
-      "Not reached",
-      "Rejected",
-      "Reached",
-      "Onboarding",
-      "Free credits onboarding",
-    ],
+    // default: "Not reached",
+    // enum: [
+    //   "Not reached",
+    //   "Rejected",
+    //   "Reached",
+    //   "Onboarding",
+    //   "Free credits onboarding",
+    // ],
   },
   notes: { type: String, default: "" },
   meetingDate: { type: Date, default: "" },
   meetingTime: { type: String, default: "" },
   companySize: { type: String, default: "" },
+});
+
+CompanySchema.index({
+  companyName: "text",
+  status: "text",
+  companySize: "text",
 });
 
 module.exports = mongoose.model("Company", CompanySchema);

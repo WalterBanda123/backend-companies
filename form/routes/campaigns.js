@@ -19,4 +19,5 @@ router.delete(
   checkAuth,
   CampaignsController.campaigns_delete_by_id
 );
+router.post('/search',checkAuth, CampaignsController.text_search_campaign)
 module.exports = router;
