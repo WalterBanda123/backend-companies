@@ -1,3 +1,4 @@
+const { $where } = require("../models/campaign");
 const Company = require("./../models/company");
 const mongoose = require("mongoose");
 
@@ -117,6 +118,64 @@ exports.text_search = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Failed to fetch companies",
+      error,
+    });
+  }
+};
+exports.filterBy_size_and_status = async (req, res) => {
+  try {
+    const companySize = req.body.companySize;
+    const companyStatus = req.body.companyStatus;
+    const items = await Company.find()
+      .where("companySize")
+      .all(`${companySize}`);
+    // .where("status")
+    // .all(`${companyStatus}`)
+    console.log(items);
+    res.status(201).json({
+      message: "Successefully fetched the items filtered",
+      items,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to get the companies",
+      error,
+    });
+  }
+};
+exports.filterBy_status = async (req, res) => {
+  try {
+    const companyStatus = req.body.companyStatus;
+    const items = await Company.find().where("status")
+      .all(`${companyStatus}`);
+    console.log(items);
+    res.status(201).json({
+      message: "Successefully fetched the items filtered",
+      items,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to get the companies",
+      error,
+    });
+  }
+};
+
+exports.filterBy_size = async (req, res) => {
+  try {
+    const companySize = req.body.companySize;
+
+    const items = await Company.find()
+      .where("companySize")
+      .all(`${companySize}`);
+    console.log(items);
+    res.status(201).json({
+      message: "Successefully fetched the items filtered",
+      items,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to get the companies",
       error,
     });
   }

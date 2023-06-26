@@ -7,6 +7,12 @@ const CompaniesController = require("../controllers/companies");
 router.post("/", checkAuth, CompaniesController.companies_create_new);
 router.get("/", checkAuth, CompaniesController.companies_get_all);
 router.get("/:id", checkAuth, CompaniesController.company_update_by_id);
+router.post(
+  "/search-size-status",
+  CompaniesController.filterBy_size_and_status
+);
+router.post("/search-status", CompaniesController.filterBy_status);
+router.post("/search-size", CompaniesController.filterBy_size);
 router.delete(
   "/:companyId",
   checkAuth,
